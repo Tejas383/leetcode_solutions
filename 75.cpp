@@ -4,17 +4,22 @@ using namespace std;
 class Solution {
 public:
     void sortColors(vector<int>& nums) {
-        int z, o, t;
-        z = o = t = 0;
-        for (int n : nums) {
-            if (n == 0) z++;
-            else if (n == 1) o++;
-            else t++;
-        }
-        for (int i = 0; i < nums.size(); i++) {
-            if (i < z) nums[i] = 0;
-            else if (i < z + o) nums[i] = 1;
-            else nums[i] = 2;
+        // Dutch National Flag Algorithm (DNF)
+        int low, med, high;
+        low = med = 0;
+        high = nums.size() - 1;
+
+        while (med <= high) {
+            if (nums[med] == 0) {
+                swap(nums[low], nums[med]);
+                low++;
+                med++;
+            } else if (nums[med] == 1) {
+                med++;
+            } else { // (nums[med] == 2)
+                swap(nums[med], nums[high]);
+                high--;
+            }
         }
     }
 };
