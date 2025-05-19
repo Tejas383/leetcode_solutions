@@ -1,21 +1,16 @@
-#include<vector>
-#include<string>
+#include<bits/stdc++.h>
 using namespace std;
 
 class Solution {
 public:
     string triangleType(vector<int>& nums) {
-        if ((nums[0] == nums[1]) && (nums[0] == nums[2]))
-            return "equilateral";
-        if(!checkSum(nums[0], nums[1], nums[2]))
+        sort(nums.begin(), nums.end());
+        if (nums[0] + nums[1] <= nums[2])
             return "none";
-        if ((nums[0] == nums[1]) || (nums[1] == nums[2]) || (nums[2] == nums[0]))
+        if (nums[0] == nums[2])
+            return "equilateral";
+        if (nums[0] == nums[1] || nums[1] == nums[2])
             return "isosceles";
         return "scalene";
-    }
-    bool checkSum(int a, int b, int c) {
-        if ((a + b > c) && (b + c > a) && (c + a > b))
-            return true;
-        return false;
     }
 };
