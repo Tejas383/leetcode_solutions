@@ -1,11 +1,11 @@
 class Solution {
 public:
     int differenceOfSums(int n, int m) {
-        int ans = 0;
-        for (int i = 1; i <= n; i++) {
-            if (i % m == 0) ans-=i;
-            else ans+=i;
-        }
-        return ans;
+        int total = n * (n + 1) / 2;
+        int a = n / m;
+        int num2 = a * (a + 1) * m / 2;
+        int num1 = total - num2;
+
+        return (num1 - num2);
     }
 };
