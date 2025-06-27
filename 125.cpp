@@ -4,15 +4,16 @@ using namespace std;
 class Solution {
 public:
     bool isPalindrome(string s) {
-        string str = "";
-        for (int i = 0; i < s.size(); i++) {
-            if ((s[i] >= 'A' && s[i] <= 'Z') || (s[i] >= 'a' && s[i] <= 'z') || (s[i] >= '0' && s[i] <= '9')) {
-                str += s[i]; 
-            }
-        }
+        int left = 0;
+        int right = s.size() - 1;
 
-        for (int i = 0; i < str.size() / 2; i++) {
-            if (tolower(str[i]) != tolower(str[str.size() - i - 1])) return false;
+        while (left < right) {
+            while (left < right && !isalnum(s[left])) left++;
+            while (left < right && !isalnum(s[right])) right--;
+            
+            if (tolower(s[left]) != tolower(s[right])) return false;
+            left++;
+            right--;
         }
         return true;
     }
