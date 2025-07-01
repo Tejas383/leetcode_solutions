@@ -4,7 +4,7 @@ using namespace std;
 class Solution {
 public:
     vector<vector<string>> groupAnagrams(vector<string>& strs) {
-        map<string, vector<string>> m;
+        unordered_map<string, vector<string>> m;
         vector<vector<string>> ans;
 
         for (int i = 0; i < strs.size(); i++) {
