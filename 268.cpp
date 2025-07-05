@@ -4,11 +4,12 @@ using namespace std;
 class Solution {
 public:
     int missingNumber(vector<int>& nums) {
-        sort(nums.begin(), nums.end());
-        for (int i = 0; i < nums.size(); i++) {
-            if (nums[i] != i) 
-                return i;
+        int calcSum = 0;
+        int n = nums.size();
+        int expSum = n * (n + 1) / 2;
+        for (auto i : nums) {
+            calcSum += i;
         }
-        return nums.size();
+        return expSum - calcSum;
     }
 };
