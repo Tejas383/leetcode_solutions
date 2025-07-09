@@ -4,33 +4,29 @@ using namespace std;
 class Solution {
 public:
     vector<vector<int>> threeSum(vector<int>& nums) {
-        vector<vector<int>> ans;
         sort(nums.begin(), nums.end());
+        unordered_map<int, int> mp;
 
         for (int i = 0; i < nums.size(); i++) {
-            if (i > 0 && nums[i] == nums[i - 1])
-                continue;
-
-            int low = i + 1;
-            int high = nums.size() - 1;
-            while (low < high) {
-                int sum = nums[i] + nums[low] + nums[high];
-                if (sum < 0)
-                    low++;
-                else if (sum > 0) 
-                    high--;
-                else {
-                    ans.push_back({nums[i], nums[low], nums[high]});
-                    int l = nums[low];
-                    int h = nums[high];
-                    while (low < high && nums[low] == l)
-                        low++;
-                    while (low < high && nums[high] == h)
-                        high--;
-                }
-            }
+            mp[nums[i]] = i;
         }
 
+        vector<vector<int>> ans;
+        for (int i = 0; i < nums.size(); i++) {
+            if (nums[i] > 0)
+                break;
+            
+            for (int j = i + 1; j < nums.size(); j++) {
+                int sum = nums[i] + nums[j];
+                int comp = 0 - sum;
+                if (mp.count(comp) && mp[comp] > j) {
+                    vector<int> subans = {nums[i], nums[j], comp};
+                    ans.push_back(subans);
+                }
+                j = mp[nums[j]];
+            }
+            i = mp[nums[i]];
+        }
         return ans;
     }
 };
