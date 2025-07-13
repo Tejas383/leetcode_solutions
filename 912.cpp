@@ -40,7 +40,7 @@ public:
         return merge(left, right);
     }
 
-    vector<int> mergeSortArray(vector<int>& nums) {
+    vector<int> sortArray(vector<int>& nums) {
         return mergeSort(nums, 0, nums.size() - 1);
     }
 };
