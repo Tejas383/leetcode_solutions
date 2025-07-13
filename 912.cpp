@@ -3,32 +3,44 @@ using namespace std;
 
 class Solution {
 public:
-    void quickSort(vector<int>&arr, int start, int end) {
-        if (start >= end) return;
+    vector<int> merge(vector<int> left, vector<int> right) {
+        vector<int> merged;
+        int i = 0;
+        int j = 0;
 
-        int randomIndex = start + rand() % (end - start + 1);
-        swap(arr[randomIndex], arr[end]);
-
-        int pivot = arr[end];
-        int i = start;
-        
-        for (int j = start; j < end; j++) {
-            if (arr[j] < pivot) {
-                swap(arr[i], arr[j]);
+        while (i < left.size() && j < right.size()) {
+            if (left[i] > right[j]) {
+                merged.push_back(right[j]);
+                j++;
+            } else {
+                merged.push_back(left[i]);
                 i++;
             }
         }
-        swap(arr[i], arr[end]);
-
-        quickSort(arr, start, i - 1);
-        quickSort(arr, i + 1, end);
+        while (i < left.size()) {
+            merged.push_back(left[i]);
+            i++;
+        }
+        while (j < right.size()) {
+            merged.push_back(right[j]);
+            j++;
+        }
+        
+        return merged;
     }
 
-    vector<int> quickSortArray(vector<int>& nums) {
-        vector<int> ans = nums;
+    vector<int> mergeSort(vector<int>&arr, int start, int end) {
+        if (start == end) 
+            return {arr[start]};
+        
+        int mid = (start + end) / 2;
+        vector<int> left = mergeSort(arr, start, mid); 
+        vector<int> right = mergeSort(arr, mid + 1, end);
 
-        quickSort(ans, 0, ans.size() - 1);
+        return merge(left, right);
+    }
 
-        return ans;
+    vector<int> mergeSortArray(vector<int>& nums) {
+        return mergeSort(nums, 0, nums.size() - 1);
     }
 };
