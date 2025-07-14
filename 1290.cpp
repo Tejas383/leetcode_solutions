@@ -24,7 +24,7 @@ public:
         int ans = 0;
         int p = 0;
         for (int i = arr.size() - 1; i >= 0; i--) {
-            ans += arr[i] * pow(2, p++);
+            ans += arr[i] * (1 << p++);
         }
 
         return ans;
