@@ -13,26 +13,18 @@ struct ListNode {
 class Solution {
 public:
     int getDecimalValue(ListNode* head) {
-        ListNode* curr = head;
-        ListNode* prev = nullptr;
-        ListNode* next = nullptr;
-
-        while (curr) {
-            next = curr->next;
-            curr->next = prev;
-            prev = curr;
-            curr = next;
-        }
-        head = prev;
-
+        vector<int> arr;
         ListNode* temp = head;
-        int ans = 0;
-        int i = 0;
+
         while (temp) {
-            int data = temp->val;
-            ans += (data * pow(2, i));
-            i++;
+            arr.push_back(temp->val);
             temp = temp->next;
+        }
+
+        int ans = 0;
+        int p = 0;
+        for (int i = arr.size() - 1; i >= 0; i--) {
+            ans += arr[i] * pow(2, p++);
         }
 
         return ans;
