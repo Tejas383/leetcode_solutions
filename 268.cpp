@@ -4,17 +4,14 @@ using namespace std;
 class Solution {
 public:
     int missingNumber(vector<int>& nums) {
-        int i = 0;
-        while (i < nums.size()) {
-            if (nums[i] < nums.size() && nums[i] != nums[nums[i]]) 
-                swap(nums[i], nums[nums[i]]);
-            else 
-                i++;
+        int xor_of_indices = 0, xor_of_elements = 0;
+        // a ^ a = 0
+        for (int i = 0; i < nums.size(); i++) {
+            xor_of_indices = xor_of_indices ^ i;
+            xor_of_elements = xor_of_elements ^ nums[i];
         }
-        for (int j = 0; j < nums.size(); j++) {
-            if (nums[j] != j)
-                return j;
-        }
-        return nums.size();
+        xor_of_indices = xor_of_indices ^ nums.size();
+        return xor_of_indices ^ xor_of_elements;
+        // the element missing in the array is : xor_of_indices ^ xor_of_elements
     }
 };
