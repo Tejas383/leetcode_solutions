@@ -5,18 +5,15 @@ class Solution {
 public:
     string makeFancyString(string s) {
         string ans = "";
-        int i = 0, j = 0;
-        int cnt = 0;
-        while (j < s.size()) {
-            if (s[i] == s[j]) {
+        int cnt = 1;
+        for (int i = 0; i < s.size(); i++) {
+            if (i > 0 && s[i] == s[i - 1]) 
                 cnt++;
-                if (cnt < 3)
-                    ans += s[j];
-                j++;
-            } else {
-                cnt = 0;
-                i = j;
-            }
+            else 
+                cnt = 1;
+            
+            if (cnt < 3)
+                ans += s[i];
         }
         return ans;
     }
