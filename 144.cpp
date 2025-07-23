@@ -13,16 +13,23 @@ struct TreeNode {
 
 class Solution {
 public:
-    void traverse(TreeNode* node, vector<int>& arr) {
-        if (node) {
-            arr.push_back(node->val);
-            traverse(node->left, arr);
-            traverse(node->right, arr);
-        }
-    }
     vector<int> preorderTraversal(TreeNode* root) {
-        vector<int> ans;
-        traverse(root, ans);
-        return ans;
+        vector<int> traversal;
+        if (!root) 
+            return traversal;
+
+        stack<TreeNode*> st;
+        st.push(root);
+        while (!st.empty()) {
+            TreeNode* node = st.top();
+            st.pop();
+            traversal.push_back(node->val);
+            if (node->right) 
+                st.push(node->right);
+            if (node->left)
+                st.push(node->left);
+        }
+
+        return traversal;
     }
 };
