@@ -13,21 +13,22 @@ struct TreeNode {
 
 class Solution {
 public:
-    int calcHeight(TreeNode* node) {
-        if (!node)
+    int dia = 0;
+
+    int calcHeight(TreeNode* root) {
+        if (!root)
             return 0;
-        int left = calcHeight(node->left);
-        int right = calcHeight(node->right);
-        if (abs(left - right) > 1) 
-            return -1;
-        if (left == -1 || right == -1)
-            return -1;
-        return (1 + max(left, right));
+        
+        int leftHeight = calcHeight(root->left);
+        int rightHeight = calcHeight(root->right);
+
+        dia = max(dia, (leftHeight + rightHeight));
+
+        return (1 + max(leftHeight, rightHeight));
     }
 
-    bool isBalanced(TreeNode* root) {
-        if (calcHeight(root) == -1)
-            return false;
-        return true;
+    int diameterOfBinaryTree(TreeNode* root) {
+        calcHeight(root);
+        return dia;
     }
 };
