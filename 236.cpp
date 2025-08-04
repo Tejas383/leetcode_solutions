@@ -11,35 +11,18 @@ struct TreeNode {
 
 class Solution {
 public:
-    bool findPath(TreeNode* root, TreeNode* node, vector<TreeNode*>& array) {
-        if (!root)
-            return false;
-        
-        array.push_back(root);
-        if (root->val == node->val)
-            return true;
-        
-        if (findPath(root->left, node, array) || findPath(root->right, node, array))
-            return true;
-        
-        array.pop_back();
-        return false;
-    }
-
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        vector<TreeNode*> P;
-        vector<TreeNode*> Q;
+        if (!root || root == p || root == q)
+            return root;
+        
+        TreeNode* left = lowestCommonAncestor(root->left, p, q);
+        TreeNode* right = lowestCommonAncestor(root->right, p, q);
 
-        findPath(root, p, P);
-        findPath(root, q, Q);
-
-        int i = 0;
-        int j = 0;
-        while (i < P.size() && j < Q.size() && P[i] == Q[j]) {
-            i++;
-            j++;
-        }
-
-        return Q[j - 1];
+        if (!left)
+            return right;
+        else if (!right)
+            return left;
+        else
+            return root;
     }
 };
