@@ -13,26 +13,25 @@ struct TreeNode {
 
 class Solution {
 public:
+    int leftHeight(TreeNode* node) {
+        if (!node)
+            return 0;
+        
+        return 1 + leftHeight(node->left);
+    }
+    int rightHeight(TreeNode* node) {
+        if (!node)
+            return 0;
+        
+        return 1 + rightHeight(node->right);
+    }
+    
     int countNodes(TreeNode* root) {
-        int count = 0;
-        if (!root)
+        if (leftHeight(root) == rightHeight(root)) {
+            int count = (1 << leftHeight(root)) - 1;
             return count;
-        
-        queue<TreeNode*> nodes;
-        nodes.push(root);
-
-        while (!nodes.empty()) {
-            auto curr = nodes.front();
-            nodes.pop();
-
-            if (curr->left)
-                nodes.push(curr->left);
-            if (curr->right)
-                nodes.push(curr->right);
-            
-            count++;
+        } else {
+            return countNodes(root->left) + countNodes(root->right) + 1;
         }
-        
-        return count;
     }
 };
