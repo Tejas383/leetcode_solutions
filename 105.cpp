@@ -13,41 +13,28 @@ struct TreeNode {
 
 class Solution {
 public:
-    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
-        if (preorder.empty())
+    TreeNode* buildTreeHelper(map<int, int>& indices, vector<int>& preorder, int preStart, int preEnd, vector<int>& inorder, int inStart, int inEnd) {
+        if (preStart > preEnd || inStart > inEnd)
             return nullptr;
-        
-        int root = preorder[0];
+
+        int root = preorder[preStart];
+        int index = indices[root];
+
         TreeNode* rootNode = new TreeNode(root);
-        
-        int index = -1;
-        vector<int> inorderLeft;
-        vector<int> inorderRight;
-        for (int i = 0; i < inorder.size(); i++) {
-            if (inorder[i] == root)
-                index = i;
-            else {
-                if (index == -1) {
-                    inorderLeft.push_back(inorder[i]);
-                } else {
-                    inorderRight.push_back(inorder[i]);
-                }
-            }
-        }
 
-        vector<int> preorderLeft;
-        for (int i = 1; i <= inorderLeft.size(); i++) {
-            preorderLeft.push_back(preorder[i]);
-        }
-
-        vector<int> preorderRight;
-        for (int i = inorderLeft.size() + 1; i < preorder.size(); i++) {
-            preorderRight.push_back(preorder[i]);
-        }
-
-        rootNode->left = buildTree(preorderLeft, inorderLeft);
-        rootNode->right = buildTree(preorderRight, inorderRight);
+        int leftSize = index - inStart;
+        rootNode->left = buildTreeHelper(indices, preorder, preStart + 1, preStart + leftSize, inorder, inStart, index - 1);
+        rootNode->right = buildTreeHelper(indices, preorder, preStart + leftSize + 1, preEnd, inorder, index + 1, inEnd);
 
         return rootNode;
+    }
+
+    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+        map<int, int> indices;
+        for (int i = 0; i < inorder.size(); i++) {
+            indices[inorder[i]] = i;
+        }
+
+        return buildTreeHelper(indices, preorder, 0, preorder.size() - 1, inorder, 0, inorder.size() - 1);
     }
 };
