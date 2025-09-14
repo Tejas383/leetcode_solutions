@@ -10,10 +10,7 @@ public:
             maxi = max(maxi, candies[i]);
         }
         for (int i = 0; i < candies.size(); i++) {
-            if (candies[i] + extraCandies >= maxi) 
-                result[i] = true;
-            else 
-                result[i] = false;
+            result[i] = (candies[i] + extraCandies) >= maxi;
         }
         return result;
     }
