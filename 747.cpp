@@ -3,21 +3,25 @@
 class Solution {
 public:
     int dominantIndex(vector<int>& nums) {
-        vector<int> arr = nums;
-        sort(arr.begin(), arr.end());
-
-        int elt;
-        if (arr[arr.size() - 1] >= (2 * arr[arr.size() - 2]))
-            elt = arr[arr.size() - 1];
-        else 
-            return -1;
-        
+        int first = -1;
+        int second = -1;
         int index = -1;
+
         for (int i = 0; i < nums.size(); i++) {
-            if (nums[i] == elt)
+            if (nums[i] > first) {
+                second = first;
+                first = nums[i];
                 index = i;
+            } else if (nums[i] > second) {
+                second = nums[i];
+            } else {
+                continue;
+            }
         }
 
-        return index;
+        if (first >= 2 * second)
+            return index;
+        else 
+            return -1;
     }
 };
