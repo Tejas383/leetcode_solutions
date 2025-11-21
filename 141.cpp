@@ -11,13 +11,17 @@
 class Solution {
 public:
     bool hasCycle(ListNode *head) {
-        set<ListNode*> pres;
-        ListNode* temp = head;
-        while (temp && temp->next && !pres.count(temp)) {
-            pres.insert(temp);
-            temp = temp->next;
+        ListNode* fast = head;
+        ListNode* slow = head;
+
+        while (fast && fast->next) {
+            fast = fast->next->next;
+            slow = slow->next;
+            if (fast == slow) {
+                return true;
+            }
         }
 
-        return (pres.count(temp));
+        return false;
     }
 };
