@@ -3,20 +3,17 @@
 class Solution {
 public:
     vector<int> transformArray(vector<int>& nums) {
-        int even, odd;
-        even = odd = 0;
-        for (int num : nums) {
-            if (num % 2 == 0)
-                even++;
+        int i = 0, j = 0;
+        while (j < nums.size()) {
+            if (nums[j] % 2 == 1) { // odd
+                nums[j] = 1;
+            } else { // even
+                nums[j] = 0;
+                swap(nums[i], nums[j]);
+                i++;
+            }
+            j++;
         }
-
-        for (int i = 0; i < nums.size(); i++) {
-            if (i < even)
-                nums[i] = 0;
-            else 
-                nums[i] = 1;
-        }
-
         return nums;
     }
 };
