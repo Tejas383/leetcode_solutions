@@ -14,26 +14,17 @@ public:
             return head;
         
         // size of LL > 2
-        ListNode* temp1 = head;
-        ListNode* temp2 = head->next;
-        ListNode* temp = temp2;
-        while (true) {
-            if (temp1->next && temp1->next->next) {
-                temp1->next = temp1->next->next;
-                temp1 = temp1->next;
-            } else {
-                break;
-            }
-            if (temp2->next && temp2->next->next) {
-                temp2->next = temp2->next->next;
-                temp2 = temp2->next;
-            } else {
-                temp2->next = nullptr;
-                break;
-            }
+        ListNode* odd = head;
+        ListNode* even = head->next;
+        ListNode* temp = even;
+        while (even && even->next) {
+            odd->next = odd->next->next;
+            odd = odd->next;
+            even->next = even->next->next;
+            even = even->next;
         }
 
-        temp1->next = temp;
+        odd->next = temp;
 
         return head;
     }
