@@ -3,17 +3,13 @@
 class Solution {
 public:
     int duplicateNumbersXOR(vector<int>& nums) {
-        sort(nums.begin(), nums.end());
+        map<int, int> freq;
         int ans = 0;
-        int i = 1;
-        while (i < nums.size()) {
-            if (nums[i] == nums[i - 1]) {
+        for (int i = 0; i < nums.size(); i++) {
+            freq[nums[i]]++;
+            if (freq[nums[i]] == 2)
                 ans ^= nums[i];
-            }
-            i++;
         }
         return ans;
     }
 };
-
-approach name
