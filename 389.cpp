@@ -11,3 +11,5 @@ public:
         return ans;
     }
 };
+
+// The XOR of same elements will be 0, and we will get the remaining element

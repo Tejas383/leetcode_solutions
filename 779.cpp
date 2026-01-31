@@ -13,3 +13,5 @@ public:
         }
     }
 };
+
+// this row's kth element will depend on the previous row's ((k + 1) / 2)th element
