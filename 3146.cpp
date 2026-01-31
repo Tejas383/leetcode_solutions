@@ -3,14 +3,14 @@
 class Solution {
 public:
     int findPermutationDifference(string s, string t) {
-        map<char, int> idx;
+        char arr[26];
         for (int i = 0; i < s.size(); i++) {
-            idx[s[i]] = i;
+            arr[s[i] - 'a'] = i;
         }
 
         int ans = 0;
         for (int i = 0; i < t.size(); i++) {
-            ans += abs(i - idx[t[i]]);
+            ans += abs(i - arr[t[i] - 'a']);
         }
 
         return ans;
