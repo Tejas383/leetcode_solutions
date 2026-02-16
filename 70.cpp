@@ -1,19 +1,24 @@
 #include <bits/stdc++.h>
-using namespace std;
 
 class Solution {
 public:
+    int solve(int n) {
+        if (n == 0)
+            return 1;
+        
+        if (n == 1)
+            return 1;
+        
+        // take one step
+        int one = solve(n - 1);
+
+        // take two steps
+        int two = solve(n - 2);
+
+        return one + two;
+    }
+
     int climbStairs(int n) {
-        int a = 0;
-        int b = 1;
-        int c;
-        int i = 0;
-        while (i < n) {
-            c = a + b;
-            a = b;
-            b = c;
-            i++;
-        }
-        return c;
+        return solve(n);
     }
 };
