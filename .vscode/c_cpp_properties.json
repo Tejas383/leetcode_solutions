@@ -1,0 +1,21 @@
+{
+  "version": 4,
+  "configurations": [
+    {
+      "name": "macOS-gcc",
+      "compilerPath": "/opt/homebrew/bin/g++-15",
+      "configurationProvider": "ms-vscode.cpptools",
+      "cStandard": "c17",
+      "cppStandard": "c++20",
+      "intelliSenseMode": "macos-gcc-arm64",
+      "includePath": [
+        "${workspaceFolder}/**",
+        "/opt/homebrew/Cellar/gcc/15.2.0_1/include/c++/15",
+        "/opt/homebrew/Cellar/gcc/15.2.0_1/include/c++/15/aarch64-apple-darwin24",
+        "/opt/homebrew/Cellar/gcc/15.2.0_1/include/c++/15/backward",
+        "/opt/homebrew/Cellar/gcc/15.2.0_1/lib/gcc/current/gcc/aarch64-apple-darwin24/15/include",
+        "/Library/Developer/CommandLineTools/SDKs/MacOSX15.sdk/usr/include"
+      ]
+    }
+  ]
+}

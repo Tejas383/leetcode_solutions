@@ -1,0 +1,44 @@
+{
+  "LeetCode C++ Template": {
+    "prefix": "lc",
+    "body": [
+      "#include <iostream>",
+      "#include <vector>",
+      "#include <string>",
+      "#include <unordered_map>",
+      "#include <unordered_set>",
+      "using namespace std;",
+      "",
+      "class Solution {",
+      "public:",
+      "    $0",
+      "};",
+      "",
+      "int main() {",
+      "    ",
+      "    return 0;",
+      "}"
+    ],
+    "description": "LeetCode C++ boilerplate with common includes"
+  },
+  "C++ Basic Template": {
+    "prefix": "cpp",
+    "body": [
+      "#include <iostream>",
+      "using namespace std;",
+      "",
+      "$0"
+    ],
+    "description": "Basic C++ file with iostream"
+  },
+  "C++ Main Function": {
+    "prefix": "main",
+    "body": [
+      "int main() {",
+      "    $0",
+      "    return 0;",
+      "}"
+    ],
+    "description": "Main function"
+  }
+}
