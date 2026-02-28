@@ -4,12 +4,14 @@
 #include <cmath>
 using namespace std;
 
-// Approach 1: Explicit binary construction (TLE due to repeated string copying)
+// Approach 1: Explicit binary construction (MLE due to repeated string copying)
+// Approach 2: Single growing binary string (still heavy due to string operations) - TLE
 
 class Solution {
 public:
     int concatenatedBinary(int n) {
-        vector<string> concat(n + 1, "0");
+        string prev = "0";
+        string curr = "0";
         for (int i = 1; i <= n; i++) {
             string bin = "";
 
@@ -23,10 +25,11 @@ public:
             }
             reverse(bin.begin(), bin.end());
 
-            concat[i] = concat[i - 1] + bin;
+            prev = curr;
+            curr += bin;
         }
 
-        string bin = concat[n];
+        string bin = curr;
         int dec = 0;
         int mod = pow(10, 9) + 7;
         for (auto c : bin)
