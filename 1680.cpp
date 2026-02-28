@@ -6,35 +6,22 @@ using namespace std;
 
 // Approach 1: Explicit binary construction (MLE due to repeated string copying)
 // Approach 2: Single growing binary string (still heavy due to string operations) - TLE
+// Accepted: Bitwise shifting + power-of-two detection (O(n), O(1))
 
 class Solution {
 public:
     int concatenatedBinary(int n) {
-        string prev = "0";
-        string curr = "0";
+        int mod = pow(10, 9) + 7;
+
+        int bits = 0;
+        long long ans = 0;
+
         for (int i = 1; i <= n; i++) {
-            string bin = "";
-
-            int m = i;
-            while (m > 0) {
-                if (m % 2 == 0)
-                    bin += '0';
-                else
-                    bin += '1';
-                m /= 2;
-            }
-            reverse(bin.begin(), bin.end());
-
-            prev = curr;
-            curr += bin;
+            if ((i & (i - 1)) == 0)
+                bits++;
+            ans = ((ans << bits) | i) % mod;
         }
 
-        string bin = curr;
-        int dec = 0;
-        int mod = pow(10, 9) + 7;
-        for (auto c : bin)
-            dec = (dec * 2 + (c - '0')) % mod;
-
-        return dec;
+        return ans;
     }
 };
