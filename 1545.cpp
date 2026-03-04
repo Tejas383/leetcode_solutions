@@ -4,23 +4,23 @@ using namespace std;
 
 class Solution {
 public:
+    char solve(int n, int k) {
+        if (n == 1)
+            return '0';
+        
+        if (k == (1 << (n - 1)))
+            return '1';
+        if (k < (1 << (n - 1)))
+            return solve(n - 1, k);
+        
+        char bit = solve(n - 1, (1 << n) - k);
+
+        if (bit == '1')
+            return '0';
+        return '1';
+    }
+
     char findKthBit(int n, int k) {
-        string prev = "0";
-        string next = "";
-        for (int i = 0; i < n; i++) {
-            next = prev + "1";
-            string temp = "";
-            for (char c : prev) {
-                if (c == '1')
-                    temp += '0';
-                else 
-                    temp += '1';
-            }
-            reverse(temp.begin(), temp.end());
-            next += temp;
-            prev = next;
-        }
-        // cout << prev;
-        return prev[k - 1];
+        return solve(n, k);
     }
 };
